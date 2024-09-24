@@ -9,7 +9,7 @@ from server.caching.cache_provider.no_cache_provider import NoCacheProvider
 from server.caching.cache_provider.sqlite_cache_provider import SQLiteCacheProvider
 from server.caching.cache_request import CacheRequest
 
-CACHE_DB_FILE = "./cache.db"
+CACHE_DB_FILE = "data/cache.db"
 
 def get_cache_provider() -> CacheProvider:
     cache_type = os.environ.get("CACHE_MODE", "memory")
