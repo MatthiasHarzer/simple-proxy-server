@@ -1,0 +1,8 @@
+services:
+  prody-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9996:8000"
+    restart: always
