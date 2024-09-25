@@ -13,11 +13,11 @@ _TABLE_SQL = """
     method TEXT NOT NULL,
     url TEXT NOT NULL,
     response BLOB NOT NULL,
-    body TEXT NULL,
+    body BLOB NULL,
     headers TEXT NULL,
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
 
-    UNIQUE (method, url, body, headers, data)
+    UNIQUE (method, url, body, headers)
     );"""
 
 
@@ -48,7 +48,7 @@ class SQLiteCacheProvider(CacheProvider):
             c = self._connect().cursor()
             c.execute(_TABLE_SQL)
         except Error as e:
-            print(e)
+            print("Error while creating table: " + str(e))
 
     def _connect(self) -> sqlite3.Connection:
         return sqlite3.connect(self.db_file)
@@ -106,6 +106,6 @@ class SQLiteCacheProvider(CacheProvider):
             else:
                 c.execute(
                     "INSERT INTO cache (method, url, response, body, headers, timestamp) "
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)",
+                    "VALUES (?, ?, ?, ?, ?, ?)",
                     (request.method, request.url, response, request.body, headers, _get_current_timestamp()))
                 conn.commit()

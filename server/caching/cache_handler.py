@@ -9,7 +9,9 @@ from server.caching.cache_provider.no_cache_provider import NoCacheProvider
 from server.caching.cache_provider.sqlite_cache_provider import SQLiteCacheProvider
 from server.caching.cache_request import CacheRequest
 
-CACHE_DB_FILE = "data/cache.db"
+DATA_DIR = "data"
+CACHE_DB_FILE = f"{DATA_DIR}/cache.db"
+
 
 def get_cache_provider() -> CacheProvider:
     cache_type = os.environ.get("CACHE_MODE", "memory")
@@ -19,6 +21,10 @@ def get_cache_provider() -> CacheProvider:
     match cache_type:
         case "sqlite":
             db_file = os.environ.get("SQLITE_FILE", CACHE_DB_FILE)
+            db_file_dir = os.path.dirname(db_file)
+            if not os.path.exists(db_file_dir):
+                os.makedirs(db_file_dir)
+
             return SQLiteCacheProvider(db_file)
         case "memory":
             return InMemoryCacheProvider()
@@ -40,11 +46,12 @@ def get_cache_provider() -> CacheProvider:
                 user=user,  # type: ignore
                 password=password,  # type: ignore
                 database=database,  # type: ignore
-                port=port # type: ignore
+                port=port  # type: ignore
             )
         case "none":
             return NoCacheProvider()
 
-    print(f"WARNING: No cache provider found for type {cache_type}. Using NoCacheProvider.")
+    print(f"WARNING: No cache provider found for type {
+          cache_type}. Using NoCacheProvider.")
 
     return NoCacheProvider()

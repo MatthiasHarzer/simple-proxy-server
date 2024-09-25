@@ -13,7 +13,7 @@ _TABLE_SQL = """
     method TEXT NOT NULL,
     url TEXT NOT NULL,
     response MEDIUMBLOB NOT NULL,
-    body TEXT NULL,
+    body BLOB NULL,
     headers TEXT NULL,
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
     );"""
@@ -100,7 +100,7 @@ class MySQLCacheProvider(CacheProvider):
                       (response, _get_current_timestamp(), existing[0]))
         else:
             c.execute(
-                "INSERT INTO cache (method, url, response, body, headers, timestamp) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                "INSERT INTO cache (method, url, response, body, headers, timestamp) VALUES (%s, %s, %s, %s, %s, %s)",
                 (request.method, request.url, response, request.body, headers, _get_current_timestamp()))
 
         db.commit()

@@ -10,7 +10,7 @@ class CacheRequest:
     url: str
     """The URL to send the request to."""
 
-    body: Any | None = None
+    body: bytes | None = None
     """The body of the request."""
 
     headers: dict | None = field(default_factory=dict)
