@@ -9,8 +9,7 @@ from server.caching.cache_provider.no_cache_provider import NoCacheProvider
 from server.caching.cache_provider.sqlite_cache_provider import SQLiteCacheProvider
 from server.caching.cache_request import CacheRequest
 
-DATA_DIR = "data"
-CACHE_DB_FILE = f"{DATA_DIR}/cache.db"
+CACHE_DB_FILE = f"data/cache.db"
 
 
 def get_cache_provider() -> CacheProvider:

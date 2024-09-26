@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  minimal-cors-server:
+    build:
+      context: https://github.com/MatthiasHarzer/minimal-cors-server.git
+      dockerfile: Dockerfile
+
+    environment:
+      - CACHE_MODE=mysql
+      - MYSQL_HOST=localhost
+      - MYSQL_USER=root
+      - MYSQL_DATABASE=proxy
+      - MYSQL_PASSWORD=secret
+
+    ports:
+      - "9996:8000"
+    restart: always

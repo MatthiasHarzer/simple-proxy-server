@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  minimal-cors-server:
+    build:
+      context: https://github.com/MatthiasHarzer/minimal-cors-server.git
+      dockerfile: Dockerfile
+
+    environment:
+      - CACHE_MODE=sqlite
+      - SQLITE_FILE=data/db/sqlite.db
+
+    volumes:
+      - ./data:/app/data
+
+    ports:
+      - "9996:8000"
+    restart: always
