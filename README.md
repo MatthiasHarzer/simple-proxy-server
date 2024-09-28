@@ -10,7 +10,7 @@ Given your server is running on `https://proxy.example.com`.
 
 Instead of making a request to a URL directly, prepend the proxy server URL.
 For example, instead of making a request to `https://cors-protected-site.com/anything` run the request
-with `https://proxy.example-com/https://cors-protected-site.com/anything`.
+with `https://proxy.example.com/https://cors-protected-site.com/anything`.
 
 Headers and body (if available) will be preserved as if making the request directly. Therefore, header-based authentication 
 or sending some form data will still work.
