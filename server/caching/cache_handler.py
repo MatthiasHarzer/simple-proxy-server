@@ -13,7 +13,7 @@ CACHE_DB_FILE = f"data/cache.db"
 
 
 def get_cache_provider() -> CacheProvider:
-    cache_type = os.environ.get("CACHE_MODE", "memory")
+    cache_type = os.environ.get("CACHE_MODE", "none")
 
     print("Using cache provider: " + cache_type)
 
