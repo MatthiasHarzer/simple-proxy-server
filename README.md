@@ -12,7 +12,15 @@ Instead of making a request to a URL directly, prepend the proxy server URL.
 For example, instead of making a request to `https://cors-protected-site.com/anything` run the request
 with `https://proxy.example.com/https://cors-protected-site.com/anything`.
 
-Headers and body (if available) will be preserved as if making the request directly. Therefore, header-based authentication 
+#### Endpoint summery
+
+| Endpoint                         | Description                                                                                                                  |
+|----------------------------------|------------------------------------------------------------------------------------------------------------------------------|
+| `/<url>`                         | The default proxy endpoint. The http-method, headers, and body will be preserved                                             |
+| `/cache/<url>`                   | Works just like `/<url>` but tries to return a cached version of the request and creates a cached version if none is present |
+| `/cache/max-age:<max-age>/<url>` | Like `/cache/<url>`, but only returns a cached response, if the response if not older that `max-age` (seconds)               |
+
+> HTTP-Method, Headers and body (if available) will be preserved as if making the request directly. Therefore, header-based authentication 
 or sending some form data will still work.
 
 
