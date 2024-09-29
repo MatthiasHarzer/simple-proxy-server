@@ -1,7 +1,8 @@
 from typing import Any, Literal
 from fastapi.responses import PlainTextResponse
 import requests
-from fastapi import Body, FastAPI, HTTPException, Request, Response
+from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi.middleware.cors import CORSMiddleware
 
 from server import caching
 from server.caching.cache_request import CacheRequest
@@ -98,6 +99,15 @@ async def handle_cache_no_age(request: Request):
 
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.add_api_route('/cache/max-age:{max_age:int}/{url:path}',
                   handle_cache, methods=ALLOWED_METHODS)
 app.add_api_route('/cache/{url:path}',
