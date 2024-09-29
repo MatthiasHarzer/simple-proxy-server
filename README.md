@@ -20,7 +20,7 @@ with `https://proxy.example.com/https://cors-protected-site.com/anything`.
 | `/cache/<url>`                   | Works just like `/<url>` but tries to return a cached version of the request and creates a cached version if none is present |
 | `/cache/max-age:<max-age>/<url>` | Like `/cache/<url>`, but only returns a cached response, if the response if not older that `max-age` (seconds)               |
 
-> HTTP-Method, Headers and body (if available) will be preserved as if making the request directly. Therefore, header-based authentication 
+> HTTP-Method, headers and body (if available) will be preserved as if making the request directly. Therefore, header-based authentication 
 or sending some form data will still work.
 
 
